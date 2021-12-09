@@ -19,7 +19,7 @@ RUN test -e /go/bin/headscale
 
 FROM ubuntu:20.04
 RUN apt-get update \
-    && apt-get install -y ca-certificates \
+    && apt-get install -y ca-certificates curl \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=build /go/bin/headscale /usr/local/bin/headscale
@@ -30,4 +30,4 @@ ENTRYPOINT [""]
 
 CMD ["headscale", "serve"]
 
-#HEALTHCHECK --interval=1m --timeout=5s CMD :debug -f http://127.0.0.1:8080/health || exit 1
+HEALTHCHECK --interval=1m --timeout=5s CMD curl -f http://127.0.0.1:8080/health || exit 1
