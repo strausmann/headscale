@@ -12,7 +12,7 @@ RUN go install -a -ldflags="-extldflags=-static" -tags netgo,sqlite_omit_load_ex
 RUN test -e /go/bin/headscale
 
 # Production image
-FROM gcr.io/distroless/base-debian11:debug
+FROM gcr.io/distroless/base-debian11
 COPY --from=build /go/bin/headscale /bin/headscale
 
 #FROM ubuntu:20.04
@@ -25,7 +25,7 @@ COPY --from=build /go/bin/headscale /bin/headscale
 ENV TZ UTC
 EXPOSE 8080/tcp
 
-#ENTRYPOINT [""]
+ENTRYPOINT [""]
 
 CMD ["headscale", "serve"]
 
