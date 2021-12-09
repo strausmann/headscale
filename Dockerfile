@@ -19,3 +19,5 @@ ENV TZ UTC
 
 EXPOSE 8080/tcp
 CMD ["headscale"]
+
+HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:8080/health || exit 1
