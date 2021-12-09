@@ -21,4 +21,4 @@ EXPOSE 8080/tcp
 
 CMD ["headscale", "serve"]
 
-HEALTHCHECK --interval=1m --timeout=5s CMD curl -f http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=1m --timeout=5s CMD curl -f http://127.0.0.1:8080/health || exit 1
